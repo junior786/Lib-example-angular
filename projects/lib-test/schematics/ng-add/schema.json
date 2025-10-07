@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "my-lib-ng-add",
+  "title": "Configuração da biblioteca",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Lib example project name",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "useDefaultDesignSystem": {
+      "type": "boolean",
+      "description": "Usar o design system padrão da biblioteca?",
+      "default": true,
+      "x-prompt": "Deseja usar o design system padrão da biblioteca?"
+    },
+    "designSystemType": {
+      "type": "string",
+      "description": "Tipo de design system",
+      "enum": ["default", "custom"],
+      "default": "default",
+      "x-prompt": {
+        "message": "Qual tipo de design system você quer usar?",
+        "type": "list",
+        "items": [
+          { "value": "default", "label": "Design system padrão da lib" },
+          { "value": "custom", "label": "Configuração customizada" }
+        ]
+      }
+    }
+  },
+  "required": []
+}
