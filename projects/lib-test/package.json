@@ -7,10 +7,11 @@
     "@angular/core": "^17.3.0"
   },
   "scripts": {
-  "build": "ng build && tsc -p tsconfig.schematics.json",
-  "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/commons/"
-
-},
+    "build:lib": "ng build lib-test && npm run build:schematics",
+    "build:schematics": "tsc -p tsconfig.schematics.json",
+    "copy:schematics": "copyfiles -u 1 schematics/collection.json schematics/ng-add/schema.json ../../dist/lib-test && copyfiles -u 3 \"schematics/ng-add/files/**/*\" ../../dist/lib-test/schematics/ng-add/files",
+    "build": "npm run build:lib && npm run build:schematics && npm run copy:schematics"
+  },
   "dependencies": {
     "tslib": "^2.3.0"
   },
