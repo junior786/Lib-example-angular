@@ -8,19 +8,20 @@ export function ngAdd(options: SchemaModel): Rule {
     context.logger.info('Instalando pacotes necessários...');
     context.addTask(new NodePackageInstallTask());
 
+    const rules: Rule[] = [];
+
     if (
       options.designSystemType === 'default' ||
       options.useDefaultDesignSystem
     ) {
       context.logger.info('Configurando design system padrão...');
-      return chain([
-        addDesignSystemFileInSourceDir(),
-        addImportToStylesScss('./design-system.scss')
-      ])(tree, context);
+      rules.push(addDesignSystemFileInSourceDir());
+      rules.push(addImportToStylesScss('./design-system.scss'));
     } else {
       context.logger.info('Pulando configuração do design system...');
     }
-    return tree;
+
+    return chain(rules)(tree, context);
   };
 }
 

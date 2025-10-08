@@ -3,14 +3,20 @@
   "schematics": "./schematics/collection.json",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0"
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@angular/material": ">=17.0.0"
   },
   "scripts": {
     "build:lib": "ng build lib-test && npm run build:schematics",
     "build:schematics": "tsc -p tsconfig.schematics.json",
     "copy:schematics": "copyfiles -u 1 schematics/collection.json schematics/ng-add/schema.json ../../dist/lib-test && copyfiles -u 3 \"schematics/ng-add/files/**/*\" ../../dist/lib-test/schematics/ng-add/files",
     "build": "npm run build:lib && npm run build:schematics && npm run copy:schematics"
+  },
+  "peerDependenciesMeta": {
+    "@angular/material": {
+      "optional": false
+    }
   },
   "dependencies": {
     "tslib": "^2.3.0"
